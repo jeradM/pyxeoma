@@ -91,7 +91,7 @@ class Xeoma():
                     self._base_url
                 )
                 t = await resp.text()
-                match = re.findall('(?:\w|\d)/(.*?).(?:mjpg|jpg)', t)
+                match = re.findall('(?:\w|\d|")/(.*?).(?:mjpg|jpg)', t)
                 if len(match) == 0:
                     raise XeomaError('Unable to find any camera image names')
                 image_names = set(match)
