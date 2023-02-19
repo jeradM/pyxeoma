@@ -87,8 +87,11 @@ class Xeoma():
         cookies = self.get_session_cookie()
         try:
             async with aiohttp.ClientSession(cookies=cookies) as session:
-                resp = await session.get(
-                    self._base_url
+                resp = await session.post(
+                    self._base_url,
+                    params={'get_sources_list_view_cameras_data': ''},
+                    json={'typeSourceCamera': 'mjpeg', 'deletedSourceId': ''}
+
                 )
                 t = await resp.text()
                 match = re.findall('(?:\w|\d|")/(.*?).(?:mjpg|jpg)', t)
